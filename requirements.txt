@@ -5,4 +5,4 @@ jishaku
 psutil
 git+https://github.com/PythonistaGuild/mystbin.py
 tabulate
-
+python-dateutil
