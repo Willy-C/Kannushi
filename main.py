@@ -22,7 +22,7 @@ DESCRIPTION = ''
 log = logging.getLogger()
 
 
-class Bot(commands.Bot):
+class Kannushi(commands.Bot):
     user: discord.ClientUser
     pool: asyncpg.Pool
     prefixes: list[str]
@@ -103,7 +103,7 @@ async def create_db_pool() -> asyncpg.Pool:
     return asyncpg.create_pool(DBURI, init=db_init, command_timeout=60)
 
 
-def get_all_prefix(bot: Bot) -> List[str]:
+def get_all_prefix(bot: Kannushi) -> List[str]:
     """A callable prefix for our bot. Returns a list of valid prefixes for the guild"""
     bot_id = bot.user.id
     prefixes = [f'<@{bot_id}> ', f'<@!{bot_id}> ']  # Accept mentioning the bot as prefix
@@ -141,7 +141,7 @@ class LogHandler:
 
         self.log.setLevel(logging.INFO)
         handler = RotatingFileHandler(
-            filename=self.logging_path / "snowflake.log",
+            filename=self.logging_path / "kannushi.log",
             encoding='utf-8',
             mode='w',
             maxBytes=self.max_bytes,
@@ -172,7 +172,7 @@ async def main() -> None:
         print(f'\nUnable to connect to PostgreSQL, exiting...\n')
         raise
 
-    async with pool, Bot() as bot, aiohttp.ClientSession() as session, LogHandler():
+    async with pool, Kannushi() as bot, aiohttp.ClientSession() as session, LogHandler():
         bot.pool = pool
         bot.session = session
         bot.mb_client = mystbin.Client(session=session)

@@ -13,13 +13,13 @@ from discord.ext import commands
 from utils.common import cleanup_code, copy_context
 
 if TYPE_CHECKING:
+    from main import Kannushi
     from utils.context import Context
-    from main import Bot
 
 
 class Owner(commands.Cog):
     def __init__(self, bot):
-        self.bot: Bot = bot
+        self.bot: Kannushi = bot
         self._last_result: Any = None
 
     @commands.command(name='eval')
@@ -165,5 +165,5 @@ class Owner(commands.Cog):
             await ctx.send(f'```\n{table}```')
 
 
-async def setup(bot: Bot):
+async def setup(bot: Kannushi):
     await bot.add_cog(Owner(bot))

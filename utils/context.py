@@ -8,7 +8,7 @@ from discord.ext import commands
 
 if TYPE_CHECKING:
     from aiohttp import ClientSession
-    from main import Bot
+    from main import Kannushi
 
 
 class ConfirmView(discord.ui.View):
@@ -98,7 +98,7 @@ class DisambiguatorView(discord.ui.View):
 
 
 class Context(commands.Context):
-    bot: Bot
+    bot: Kannushi
 
     @property
     def session(self) -> ClientSession:
