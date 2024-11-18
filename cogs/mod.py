@@ -62,9 +62,9 @@ class Mod(commands.Cog):
                 clean_method = self._non_mod_user_clean
 
         if is_mod:
-            search = min(max(2, search), 1000)
+            search = min(max(1, search), 1000)
         else:
-            search = min(max(2, search), 25)
+            search = min(max(1, search), 25)
 
         spam = await clean_method(ctx, search)
         deleted = sum(spam.values())
